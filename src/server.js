@@ -15,13 +15,16 @@ const server = http.createServer(app); // 서버 만들기(http 서버)
 
 const wss = new WebSocket.Server({ server }); // 웺 소켓 서버를 만들고 http 서버를 전달해준다 이렇게 하면 같은 서버에서 http, websocket 모두 돌릴 수 있다
 
+const sockets = [];
+
 wss.on('connection', (socket) => {
+    sockets.push(socket);
     console.log('Connected to Browser ✅');
     socket.on('close', () => console.log('Disconnected from Browser'));
-    socket.on('message', (message) =>
-        console.log('Message from Browser', String(message))
-    );
-    socket.send('hello!!!');
+    socket.on('message', (message) => {
+        sockets.forEach((aSocket) => aSocket.send(message.toString()));
+        socket.send(message.toString());
+    });
 }); //프론트에서의 이벤트 리스너와 같이 이벤트를 듣는다
 
 server.listen(3001, handleListen);
