@@ -11,7 +11,10 @@ html(lang="en")
             h1 Zoom
         main
             ul
-            form
+            form#nick
+                input(type="text", placeholder="Choose a nickname", rewuired)
+                button Save
+            form#message
                 input(type="text", placeholder="write a msg", rewuired)
                 button Send
         script(src="/public/js/app.js") 

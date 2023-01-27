@@ -23,7 +23,6 @@ wss.on('connection', (socket) => {
     socket.on('close', () => console.log('Disconnected from Browser'));
     socket.on('message', (message) => {
         sockets.forEach((aSocket) => aSocket.send(message.toString()));
-        socket.send(message.toString());
     });
 }); //프론트에서의 이벤트 리스너와 같이 이벤트를 듣는다
 
