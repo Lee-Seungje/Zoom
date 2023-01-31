@@ -8,6 +8,13 @@ let roomName = '';
 
 room.hidden = true;
 
+const addMessage = (message) => {
+    const ul = room.querySelector('ul');
+    const li = document.createElement('li');
+    li.innerText = message;
+    ul.appendChild(li);
+};
+
 const showRoom = () => {
     welcome.hidden = true;
     room.hidden = false;
@@ -24,3 +31,7 @@ const handleSubmit = (event) => {
 };
 
 form.addEventListener('submit', handleSubmit);
+
+socket.on('welcome', () => {
+    addMessage('Someone Joined');
+});
