@@ -48,7 +48,7 @@ wsServer.on('connection', (socket) => {
     socket.on('enter_room', (roomName, done) => {
         socket.join(roomName);
         done();
-        socket
+        wsServer.sockets
             .to(roomName)
             .emit('welcome', socket.nickname, countRoom(roomName));
         wsServer.sockets.emit('room_change', publicRooms());
